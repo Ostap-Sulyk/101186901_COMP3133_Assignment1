@@ -1,14 +1,14 @@
 {
   "name": "101186901_COMP3133_Assignment1",
   "version": "1.0.0",
-  "description": "",
+  "description": "Addignment 1 from fullstac",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ostap Sulyk",
   "license": "ISC",
   "dependencies": {
     "apollo-server-express": "^3.11.1",
