@@ -17,11 +17,9 @@ exports.resolvers = {
             return Employee.find({});
         },
         getEmployeeByID: async (parent, args) => {
-
-
             if (!args.id) return JSON.stringify({status: false, "message": "No ID found"})
 
-            return Employee.find({_id: args.id});
+            return Employee.findOne({_id: args.id});
         },
 
         getEmployeesByFirstName: async (parent, args) => {
@@ -49,26 +47,26 @@ exports.resolvers = {
             return newEmp.save()
         },
 
-        updateEmployee: async (parent, {input}) => {
-            const update = {};
-            if (!input.id) throw new Error("Employee ID is required for updating.")
-            if (input.first_name) update.first_name = input.first_name
-            if (input.last_name) update.last_name = input.last_name
-            if (input.email) update.email = input.email
-            if (input.gender) update.gender = input.gender
-            if (input.salary) update.salary = input.salary
+        updateEmployee: async (parent, {update}) => {
+            const updateEmployee = {};
+            if (!update.id) throw new Error("Employee ID is required for updating.")
+            if (update.first_name) updateEmployee.first_name = update.first_name
+            if (update.last_name) updateEmployee.last_name = update.last_name
+            if (update.email) updateEmployee.email = update.email
+            if (update.gender) updateEmployee.gender = update.gender
+            if (update.salary) updateEmployee.salary = update.salary
 
             return Employee.findOneAndUpdate(
-                {_id: input.id},
-                {$set: update},
+                {_id: update.id},
+                {$set: updateEmployee},
                 {new: true}
             )
         },
 
         deleteEmployee: async (parent, args) => {
-            if (!args.id) return JSON.stringify({status: false, "message": "No ID found"})
+            if (!args.id) return {status: false, "message": "ID not found"}
             await Employee.findByIdAndDelete(args.id)
-            return JSON.stringify({status: true, message: "Deleted"})
+            return {status: true, message: "Deleted"}
         },
 
         signup: async (parent, args) => {
@@ -80,7 +78,7 @@ exports.resolvers = {
             const user = new User(args)
             await user.save()
 
-            return JSON.stringify({status: true, message: "Registered"})
+            return {status: true, message: "Registered"}
         }
     }
 }

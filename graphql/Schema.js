@@ -64,7 +64,7 @@ exports.typeDefs = gql `
             password: String!
             email: String!): RegisterResponse!
         addEmployee(input: EmployeeInput): Employee!
-        updateEmployee(input: EmployeeInput): Employee!
-        deleteEmployee(id: String!): DeleteResponse!
+        updateEmployee(update: EmployeeUpdate): Employee!
+        deleteEmployee(id: ID!): DeleteResponse!
     }
 `
