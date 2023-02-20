@@ -17,10 +17,7 @@ const employeeSchema = new mongoose.Schema({
     gender: {
         type: String,
         required: true,
-        enum: {
-            values: ['Male', 'Gender', 'Other'],
-            message: "Gender must be Male, Female, or Other."
-        }
+        enum: ['Male', 'Gender', 'Other']
     },
     salary: {
         type: Number,
